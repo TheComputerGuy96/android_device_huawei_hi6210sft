@@ -37,6 +37,9 @@ TARGET_NO_BOOTLOADER := true
 # Camera
 USE_CAMERA_STUB := true
 
+# Chromium
+PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+
 # Display
 TARGET_USE_PAN_DISPLAY := true
 
