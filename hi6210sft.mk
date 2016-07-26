@@ -7,7 +7,7 @@ PRODUCT_AAPT_CONFIG := xhdpi hdpi normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Blobs
-$(call inherit-product, vendor/hisi/hi6210sft/device-vendor.mk)
+$(call inherit-product, vendor/hisi/hi6210sft/hi6210sft-vendor.mk)
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
 # Chromium 32 Bit
