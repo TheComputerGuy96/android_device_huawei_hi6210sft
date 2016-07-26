@@ -54,20 +54,20 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-    	$(LOCAL_PATH)/rootdir/fstab.hi6210sft:root/fstab.hi6210sft \
-    	$(LOCAL_PATH)/rootdir/init.5801.rc:root/init.5801.rc \
-    	$(LOCAL_PATH)/rootdir/init.audio.rc:root/init.audio.rc \
-    	$(LOCAL_PATH)/rootdir/init.connectivity.hi110x.rc:root/init.connectivity.hi110x.rc \
-    	$(LOCAL_PATH)/rootdir/init.environ.rc:root/init.environ.rc \
-    	$(LOCAL_PATH)/rootdir/init.extmodem.rc:root/init.extmodem.rc \
-    	$(LOCAL_PATH)/rootdir/init.hi6210sft.rc:root/init.hi6210sft.rc \
-    	$(LOCAL_PATH)/rootdir/init.hi6210sft.usb.rc:root/init.hi6210sft.usb.rc \
-    	$(LOCAL_PATH)/rootdir/init.hisi.rc:root/init.hisi.rc \
-    	$(LOCAL_PATH)/rootdir/init.manufacture.rc:root/init.manufacture.rc \
-    	$(LOCAL_PATH)/rootdir/init.platform.rc:root/init.platform.rc \
-    	$(LOCAL_PATH)/rootdir/init.tee.rc:root/init.tee.rc \
-    	$(LOCAL_PATH)/rootdir/init.trace.rc:root/init.trace.rc \
-    	$(LOCAL_PATH)/rootdir/ueventd.hi6210sft.rc:root/ueventd.hi6210sft.rc
+    	$(LOCAL_PATH)/ramdisk/fstab.hi6210sft:root/fstab.hi6210sft \
+    	$(LOCAL_PATH)/ramdisk/init.5801.rc:root/init.5801.rc \
+    	$(LOCAL_PATH)/ramdisk/init.audio.rc:root/init.audio.rc \
+    	$(LOCAL_PATH)/ramdisk/init.connectivity.hi110x.rc:root/init.connectivity.hi110x.rc \
+    	$(LOCAL_PATH)/ramdisk/init.environ.rc:root/init.environ.rc \
+    	$(LOCAL_PATH)/ramdisk/init.extmodem.rc:root/init.extmodem.rc \
+    	$(LOCAL_PATH)/ramdisk/init.hi6210sft.rc:root/init.hi6210sft.rc \
+    	$(LOCAL_PATH)/ramdisk/init.hi6210sft.usb.rc:root/init.hi6210sft.usb.rc \
+    	$(LOCAL_PATH)/ramdisk/init.hisi.rc:root/init.hisi.rc \
+    	$(LOCAL_PATH)/ramdisk/init.manufacture.rc:root/init.manufacture.rc \
+    	$(LOCAL_PATH)/ramdisk/init.platform.rc:root/init.platform.rc \
+    	$(LOCAL_PATH)/ramdisk/init.tee.rc:root/init.tee.rc \
+    	$(LOCAL_PATH)/ramdisk/init.trace.rc:root/init.trace.rc \
+    	$(LOCAL_PATH)/ramdisk/ueventd.hi6210sft.rc:root/ueventd.hi6210sft.rc
 
 # Zygote
 ADDITIONAL_DEFAULT_PROPERTIES += \
