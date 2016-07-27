@@ -19,6 +19,10 @@ PRODUCT_PACKAGES += \
         audio.usb.default \
         tinyplay
 
+# Bin
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/bin/,system/bin) \
+
 # Blobs
 #$(call inherit-product, vendor/hisi/hi6210sft/hi6210sft-vendor.mk)
 #PRODUCT_RESTRICT_VENDOR_FILES := false
@@ -48,9 +52,35 @@ PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/rootdir/lib64/libwebviewchromium_plat_support.so:system/lib64/libwebviewchromium_plat_support.so
 
 # Codecs
-#PRODUCT_COPY_FILES += \
-#        $(LOCAL_PATH)/rootdir/etc/media_codecs.xml:system/etc/media_codecs.xml \
-#        $(LOCAL_PATH)/rootdir/etc/media_profiles.xml:system/etc/media_profiles.xml
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/etc/hisi_omx.cfg:system/etc/hisi_omx.cfg \
+        $(LOCAL_PATH)/rootdir/etc/media_codecs.xml:system/etc/media_codecs.xml \
+        $(LOCAL_PATH)/rootdir/etc/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
+        $(LOCAL_PATH)/rootdir/etc/media_profiles.xml:system/etc/media_profiles.xml \
+
+# Codecs K3
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_ffmpeg.so:system/lib/lib_k3_ffmpeg.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_avc.so:system/lib/lib_k3_omx_avc.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_avcenc.so:system/lib/lib_k3_omx_avcenc.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omxcore.so:system/lib/lib_k3_omxcore.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_mpeg2.so:system/lib/lib_k3_omx_mpeg2.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_mpeg4.so:system/lib/lib_k3_omx_mpeg4.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_rv.so:system/lib/lib_k3_omx_rv.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_vc1.so:system/lib/lib_k3_omx_vc1.so \
+        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_vp8.so:system/lib/lib_k3_omx_vp8.so \
+
+# Codecs K3 64 Bit
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_ffmpeg.so:system/lib64/lib_k3_ffmpeg.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_avc.so:system/lib64/lib_k3_omx_avc.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_avcenc.so:system/lib64/lib_k3_omx_avcenc.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omxcore.so:system/lib64/lib_k3_omxcore.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_mpeg2.so:system/lib64/lib_k3_omx_mpeg2.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_mpeg4.so:system/lib64/lib_k3_omx_mpeg4.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_rv.so:system/lib64/lib_k3_omx_rv.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_vc1.so:system/lib64/lib_k3_omx_vc1.so \
+        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_vp8.so:system/lib64/lib_k3_omx_vp8.so \
 
 # Display
 TARGET_SCREEN_HEIGHT := 1280
@@ -67,6 +97,22 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 PRODUCT_PACKAGES += \
     	make_ext4fs \
     	setup_fs
+
+# GPS
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/gnss,system/etc/gnss) \
+        $(LOCAL_PATH)/rootdir/etc/gps.conf:system/etc/gps.conf \
+        $(LOCAL_PATH)/rootdir/etc/gpsconfig.xml:system/etc/gpsconfig.xml \
+        $(LOCAL_PATH)/rootdir/etc/hisi_cfg.ini:system/etc/hisi_cfg.ini \
+        $(LOCAL_PATH)/rootdir/etc/hisi_cfg_alice.ini:system/etc/hisi_cfg_alice.ini \
+        $(LOCAL_PATH)/rootdir/etc/hisi_cfg_cherry.ini:system/etc/hisi_cfg_cherry.ini \
+        $(LOCAL_PATH)/rootdir/lib/hw/gps.hi110x.default.so:system/lib/hw/gps.hi110x.default.so \
+        $(LOCAL_PATH)/rootdir/lib/libgps_factory_test.so:system/lib/libgps_factory_test.so \
+        $(LOCAL_PATH)/rootdir/lib/libgps_factory_test_hi110x.so:system/lib/libgps_factory_test_hi110x.so \
+        $(LOCAL_PATH)/rootdir/lib64/hw/gps.hi110x.default.so:system/lib64/hw/gps.hi110x.default.so \
+        $(LOCAL_PATH)/rootdir/lib64/hw/gps.hi6210sft.so:system/lib64/hw/gps.hi6210sft.so \
+        $(LOCAL_PATH)/rootdir/lib64/libgps_factory_test.so:system/lib64/libgps_factory_test.so \
+        $(LOCAL_PATH)/rootdir/lib64/libgps_factory_test_hi110x.so:system/lib64/libgps_factory_test_hi110x.so
 
 # Graphics (Don't use hwcomposer.hi6210sft module for now or will not boot)
 PRODUCT_COPY_FILES += \
@@ -150,6 +196,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.hw_device_mode=clg_mode \
 	ro.multi.rild=false
 
+# Thermald
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/etc/thermald.xml:system/etc/thermald.xml \
+        $(LOCAL_PATH)/rootdir/etc/thermald_performance.xml:system/etc/thermald_performance.xml
+
 # USB
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
@@ -158,37 +209,31 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/wifi,system/etc/wifi) \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/vendor/firmware,system/vendor/firmware) \
-        $(LOCAL_PATH)/rootdir/bin/hisi_connectivity.sh:system/bin/hisi_connectivity.sh \
-        $(LOCAL_PATH)/rootdir/bin/hostapd:system/bin/hostapd \
-        $(LOCAL_PATH)/rootdir/bin/oam_app:system/bin/oam_app \
-        $(LOCAL_PATH)/rootdir/bin/octty:system/bin/octty \
-        $(LOCAL_PATH)/rootdir/bin/start_110x_service.sh:system/bin/start_110x_service.sh \
-        $(LOCAL_PATH)/rootdir/bin/wpa_cli_hisi:system/bin/wpa_cli_hisi \
-        $(LOCAL_PATH)/rootdir/bin/wpa_supplicant:system/bin/wpa_supplicant_hisi \
         $(LOCAL_PATH)/rootdir/lib/libbt_factory_test.so:system/lib/libbt_factory_test.so \
         $(LOCAL_PATH)/rootdir/lib/libbt_factory_test_hi110x.so:system/lib/libbt_factory_test_hi110x.so \
         $(LOCAL_PATH)/rootdir/lib/libwifi_factory_test.so:system/lib/libwifi_factory_test.so \
         $(LOCAL_PATH)/rootdir/lib/libwifi_factory_test_hi110x.so:system/lib/libwifi_factory_test_hi110x.so \
+        $(LOCAL_PATH)/rootdir/lib/libwifipro.so:system/lib/libwifipro.so \
         $(LOCAL_PATH)/rootdir/lib/libwpa_client_hisi.so:system/lib/libwpa_client_hisi.so \
         $(LOCAL_PATH)/rootdir/lib64/libbt_factory_test.so:system/lib64/libbt_factory_test.so \
         $(LOCAL_PATH)/rootdir/lib64/libbt_factory_test_hi110x.so:system/lib64/libbt_factory_test_hi110x.so \
         $(LOCAL_PATH)/rootdir/lib64/libwifi_factory_test.so:system/lib64/libwifi_factory_test.so \
         $(LOCAL_PATH)/rootdir/lib64/libwifi_factory_test_hi110x.so:system/lib64/libwifi_factory_test_hi110x.so \
+        $(LOCAL_PATH)/rootdir/lib64/libwifipro.so:system/lib64/libwifipro.so \
         $(LOCAL_PATH)/rootdir/lib64/libwpa_client_hisi.so:system/lib64/libwpa_client_hisi.so \
         $(LOCAL_PATH)/rootdir/vendor/lib/libbt-vendor-hi110x.so:system/vendor/lib/libbt-vendor-hi110x.so \
         $(LOCAL_PATH)/rootdir/vendor/lib64/libbt-vendor-hi110x.so:system/vendor/lib64/libbt-vendor-hi110x.so
 
 PRODUCT_PACKAGES += \
-    	dhcpcd.conf \
-    	hostapd \
-	hostapd.conf \
-    	libnetcmdiface \
-    	libwpa_client \
+	bt_vendor.conf \
+	dhcpcd \
+	hostapd_hisi.conf \
 	oam_app \
 	octty \
 	wpa_cli_hisi \
-    	wpa_supplicant \
-    	wpa_supplicant.conf \
+	wpa_supplicant_hisi \
+ 	wpa_supplicant_hisi.conf \
+    	wpa_supplicant.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
     	wifi.interface=wlan0 \
