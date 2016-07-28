@@ -16,10 +16,6 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a15
 
-# Audio
-BOARD_USES_ALSA_AUDIO := true
-BOARD_USES_GENERIC_AUDIO := false
-
 # Blobs
 -include vendor/hisi/hi6210sft/BoardConfigVendor.mk
 

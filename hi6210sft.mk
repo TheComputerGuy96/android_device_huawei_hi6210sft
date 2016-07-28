@@ -6,22 +6,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 PRODUCT_AAPT_CONFIG := xhdpi hdpi normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-# Audio
-$(call inherit-product, device/huawei/hi6210sft/products/Audio.mk)
-
-PRODUCT_PACKAGES += \
-        audio.a2dp.default \
-	audio.primary.hi6210st \
-        audio.r_submix.default \
-        audio.usb.default \
-	libaudioutils \
-	libtinyalsa \
-    	sound_trigger.primary.hi6210sft \
-	tinycap	\
-	tinymix \
-	tinypcminfo \
-        tinyplay
-
 # Bin
 PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/bin/,system/bin) \
