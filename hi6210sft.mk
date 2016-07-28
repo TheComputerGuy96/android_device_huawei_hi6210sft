@@ -7,15 +7,7 @@ PRODUCT_AAPT_CONFIG := xhdpi hdpi normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Audio
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/audio,system/etc/audio) \
-        $(LOCAL_PATH)/rootdir/etc/audio_effects.conf:system/etc/audio_effects.conf \
-        $(LOCAL_PATH)/rootdir/etc/audio_policy.conf:system/etc/audio_policy.conf \
-        $(LOCAL_PATH)/rootdir/lib/hw/audio.primary.hi6210sft.so:system/lib/hw/audio.primary.hi6210sft.so \
-        $(LOCAL_PATH)/rootdir/lib/libaudioflinger.huawei.so:system/lib/libaudioflinger.huawei.so \
-        $(LOCAL_PATH)/rootdir/lib/libaudioroute.so:system/lib/libaudioroute.so \
-        $(LOCAL_PATH)/rootdir/lib64/hw/audio.primary.hi6210sft.so:system/lib64/hw/audio.primary.hi6210sft.so \
-        $(LOCAL_PATH)/rootdir/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf
+$(call inherit-product, device/huawei/hi6210sft/products/Audio.mk)
 
 PRODUCT_PACKAGES += \
         audio.a2dp.default \
@@ -34,14 +26,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/bin/,system/bin) \
 
-# Blobs
-#$(call inherit-product, vendor/hisi/hi6210sft/hi6210sft-vendor.mk)
-#PRODUCT_RESTRICT_VENDOR_FILES := false
-
 # Bluetooth
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/bluetooth,system/etc/bluetooth)
-
 PRODUCT_PACKAGES += \
 	bluetooth.default \
 	
@@ -54,70 +39,16 @@ PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/rootdir/phone.prop:system/phone.prop
 
 # Camera
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/camera,system/etc/camera) \
-        $(LOCAL_PATH)/rootdir/etc/camera_orientation.cfg:system/etc/camera_orientation.cfg \
-        $(LOCAL_PATH)/rootdir/etc/camera_resolutions.cfg:system/etc/camera_resolutions.cfg \
-        $(LOCAL_PATH)/rootdir/etc/camera_videosnapshot.cfg:system/etc/camera_videosnapshot.cfg \
-        $(LOCAL_PATH)/rootdir/lib/hw/camera.hi6210sft.so:system/lib/hw/camera.hi6210sft.so \
-        $(LOCAL_PATH)/rootdir/lib/libcamera_core.so:system/lib/libcamera_core.so \
-        $(LOCAL_PATH)/rootdir/lib/libCameraHwCallBack.so:system/lib/libCameraHwCallBack.so \
-        $(LOCAL_PATH)/rootdir/lib/libCameraHwParam.so:system/lib/libCameraHwParam.so \
-        $(LOCAL_PATH)/rootdir/lib/libCameraHwSendCmd.so:system/lib/libCameraHwSendCmd.so \
-        $(LOCAL_PATH)/rootdir/lib/libcamera_omron.so:system/lib/libcamera_omron.so \
-        $(LOCAL_PATH)/rootdir/lib/libgnuexif.so:system/lib/libgnuexif.so \
-        $(LOCAL_PATH)/rootdir/lib/libjpegenchw.so:system/lib/libjpegenchw.so \
-        $(LOCAL_PATH)/rootdir/lib/libjpu.so:system/lib/libjpu.so \
-        $(LOCAL_PATH)/rootdir/lib64/hw/camera.hi6210sft.so:system/lib64/hw/camera.hi6210sft.so \
-        $(LOCAL_PATH)/rootdir/lib64/libCameraHwCallBack.so:system/lib64/libCameraHwCallBack.so \
-        $(LOCAL_PATH)/rootdir/lib64/libCameraHwParam.so:system/lib64/libCameraHwParam.so \
-        $(LOCAL_PATH)/rootdir/lib64/libCameraHwSendCmd.so:system/lib64/libCameraHwSendCmd.so \
-        $(LOCAL_PATH)/rootdir/lib64/libgnuexif.so:system/lib64/libgnuexif.so \
-        $(LOCAL_PATH)/rootdir/lib64/libjpu.so:system/lib64/libjpu.so
+$(call inherit-product, device/huawei/hi6210sft/products/Camera.mk)
 
-# Chromium 32 Bit
-PRODUCT_COPY_FILES += \
-       $(LOCAL_PATH)/rootdir/lib/libwebviewchromium.so:system/lib/libwebviewchromium.so \
-       $(LOCAL_PATH)/rootdir/lib/libwebviewchromium_loader.so:system/lib/libwebviewchromium_loader.so \
-       $(LOCAL_PATH)/rootdir/lib/libwebviewchromium_plat_support.so:system/lib/libwebviewchromium_plat_support.so
+PRODUCT_PACKAGES += \
+	camera.hi6210sft
 
-# Chromium 64 Bit
-PRODUCT_COPY_FILES += \
-       $(LOCAL_PATH)/rootdir/lib64/libwebviewchromium.so:system/lib64/libwebviewchromium.so \
-       $(LOCAL_PATH)/rootdir/lib64/libwebviewchromium_loader.so:system/lib64/libwebviewchromium_loader.so \
-       $(LOCAL_PATH)/rootdir/lib64/libwebviewchromium_plat_support.so:system/lib64/libwebviewchromium_plat_support.so
+# Chrome
+$(call inherit-product, device/huawei/hi6210sft/products/Chrome.mk)
 
 # Codecs
-PRODUCT_COPY_FILES += \
-        frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-        $(LOCAL_PATH)/rootdir/etc/hisi_omx.cfg:system/etc/hisi_omx.cfg \
-        $(LOCAL_PATH)/rootdir/etc/media_codecs.xml:system/etc/media_codecs.xml \
-        $(LOCAL_PATH)/rootdir/etc/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
-        $(LOCAL_PATH)/rootdir/etc/media_profiles.xml:system/etc/media_profiles.xml \
-
-# Codecs K3
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_ffmpeg.so:system/lib/lib_k3_ffmpeg.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_avc.so:system/lib/lib_k3_omx_avc.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_avcenc.so:system/lib/lib_k3_omx_avcenc.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omxcore.so:system/lib/lib_k3_omxcore.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_mpeg2.so:system/lib/lib_k3_omx_mpeg2.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_mpeg4.so:system/lib/lib_k3_omx_mpeg4.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_rv.so:system/lib/lib_k3_omx_rv.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_vc1.so:system/lib/lib_k3_omx_vc1.so \
-        $(LOCAL_PATH)/rootdir/lib/lib_k3_omx_vp8.so:system/lib/lib_k3_omx_vp8.so \
-
-# Codecs K3 64 Bit
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_ffmpeg.so:system/lib64/lib_k3_ffmpeg.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_avc.so:system/lib64/lib_k3_omx_avc.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_avcenc.so:system/lib64/lib_k3_omx_avcenc.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omxcore.so:system/lib64/lib_k3_omxcore.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_mpeg2.so:system/lib64/lib_k3_omx_mpeg2.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_mpeg4.so:system/lib64/lib_k3_omx_mpeg4.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_rv.so:system/lib64/lib_k3_omx_rv.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_vc1.so:system/lib64/lib_k3_omx_vc1.so \
-        $(LOCAL_PATH)/rootdir/lib64/lib_k3_omx_vp8.so:system/lib64/lib_k3_omx_vp8.so \
+$(call inherit-product, device/huawei/hi6210sft/products/Codecs.mk)
 
 # Display
 TARGET_SCREEN_HEIGHT := 1280
@@ -136,20 +67,7 @@ PRODUCT_PACKAGES += \
     	setup_fs
 
 # GPS
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/gnss,system/etc/gnss) \
-        $(LOCAL_PATH)/rootdir/etc/gps.conf:system/etc/gps.conf \
-        $(LOCAL_PATH)/rootdir/etc/gpsconfig.xml:system/etc/gpsconfig.xml \
-        $(LOCAL_PATH)/rootdir/etc/hisi_cfg.ini:system/etc/hisi_cfg.ini \
-        $(LOCAL_PATH)/rootdir/etc/hisi_cfg_alice.ini:system/etc/hisi_cfg_alice.ini \
-        $(LOCAL_PATH)/rootdir/etc/hisi_cfg_cherry.ini:system/etc/hisi_cfg_cherry.ini \
-        $(LOCAL_PATH)/rootdir/lib/hw/gps.hi110x.default.so:system/lib/hw/gps.hi110x.default.so \
-        $(LOCAL_PATH)/rootdir/lib/libgps_factory_test.so:system/lib/libgps_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib/libgps_factory_test_hi110x.so:system/lib/libgps_factory_test_hi110x.so \
-        $(LOCAL_PATH)/rootdir/lib64/hw/gps.hi110x.default.so:system/lib64/hw/gps.hi110x.default.so \
-        $(LOCAL_PATH)/rootdir/lib64/hw/gps.hi6210sft.so:system/lib64/hw/gps.hi6210sft.so \
-        $(LOCAL_PATH)/rootdir/lib64/libgps_factory_test.so:system/lib64/libgps_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib64/libgps_factory_test_hi110x.so:system/lib64/libgps_factory_test_hi110x.so
+$(call inherit-product, device/huawei/hi6210sft/products/GPS.mk)
 
 # Graphics (Don't use hwcomposer.hi6210sft module for now or will not boot)
 PRODUCT_COPY_FILES += \
@@ -197,13 +115,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/rootdir/lib64/libnvme.so:system/lib64/libnvme.so \
 
-# Log
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/log,system/etc/log) \
-
-# modemConfig
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/modemConfig,system/etc/modemConfig) \
+# Modem
+$(call inherit-product, device/huawei/hi6210sft/products/Modem.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
@@ -232,17 +145,7 @@ PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/ramdisk/ueventd.hi6210sft.rc:root/ueventd.hi6210sft.rc
 
 # RIL
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/lib/libbalong_audio_ril.so:system/lib/libbalong_audio_ril.so \
-        $(LOCAL_PATH)/rootdir/lib/libbalong-ril.so:system/lib/libbalong-ril.so \
-        $(LOCAL_PATH)/rootdir/lib/libbalong-ril-1.so:system/lib/libbalong-ril-1.so \
-        $(LOCAL_PATH)/rootdir/lib/libreference-ril.so:system/lib/libreference-ril.so \
-        $(LOCAL_PATH)/rootdir/lib/librilutils.so:system/lib/librilutils.so \
-        $(LOCAL_PATH)/rootdir/lib64/libbalong_audio_ril.so:system/lib64/libbalong_audio_ril.so \
-        $(LOCAL_PATH)/rootdir/lib64/libbalong-ril.so:system/lib64/libbalong-ril.so \
-        $(LOCAL_PATH)/rootdir/lib64/libbalong-ril-1.so:system/lib64/libbalong-ril-1.so \
-        $(LOCAL_PATH)/rootdir/lib64/libreference-ril.so:system/lib64/libreference-ril.so \
-        $(LOCAL_PATH)/rootdir/lib64/librilutils.so:system/lib64/librilutils.so
+$(call inherit-product, device/huawei/hi6210sft/products/Balong.mk)
 
 PRODUCT_PACKAGES += \
 	hwcustTelephony-common \
@@ -262,22 +165,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.multi.rild=false
 
 # Supplicant
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/lib/libagnssal.so:system/lib/libagnssal.so \
-        $(LOCAL_PATH)/rootdir/lib/libgnssadapter.so:system/lib/libgnssadapter.so \
-        $(LOCAL_PATH)/rootdir/lib64/libagnssal.so:system/lib64/libagnssal.so \
-        $(LOCAL_PATH)/rootdir/lib64/libgnssadapter.so:system/lib64/libgnssadapter.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl10client.so:system/lib/libsupl10client.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20client.so:system/lib/libsupl20client.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20comon.so:system/lib/libsupl20comon.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20if.so:system/lib/libsupl20if.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1comn.so:system/lib/libsupl20oasn1comn.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1lpp.so:system/lib/libsupl20oasn1lpp.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1rrc.so:system/lib/libsupl20oasn1rrc.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1rrlp.so:system/lib/libsupl20oasn1rrlp.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1supl1.so:system/lib/libsupl20oasn1supl1.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1supl2.so:system/lib/libsupl20oasn1supl2.so \
-        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1tia.so:system/lib/libsupl20oasn1tia.so \
+$(call inherit-product, device/huawei/hi6210sft/products/Supl20client.mk)
 
 # Thermald
 PRODUCT_COPY_FILES += \
@@ -293,23 +181,7 @@ PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
 # Wifi
-PRODUCT_COPY_FILES += \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/wifi,system/etc/wifi) \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/vendor/firmware,system/vendor/firmware) \
-        $(LOCAL_PATH)/rootdir/lib/libbt_factory_test.so:system/lib/libbt_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib/libbt_factory_test_hi110x.so:system/lib/libbt_factory_test_hi110x.so \
-        $(LOCAL_PATH)/rootdir/lib/libwifi_factory_test.so:system/lib/libwifi_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib/libwifi_factory_test_hi110x.so:system/lib/libwifi_factory_test_hi110x.so \
-        $(LOCAL_PATH)/rootdir/lib/libwifipro.so:system/lib/libwifipro.so \
-        $(LOCAL_PATH)/rootdir/lib/libwpa_client_hisi.so:system/lib/libwpa_client_hisi.so \
-        $(LOCAL_PATH)/rootdir/lib64/libbt_factory_test.so:system/lib64/libbt_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib64/libbt_factory_test_hi110x.so:system/lib64/libbt_factory_test_hi110x.so \
-        $(LOCAL_PATH)/rootdir/lib64/libwifi_factory_test.so:system/lib64/libwifi_factory_test.so \
-        $(LOCAL_PATH)/rootdir/lib64/libwifi_factory_test_hi110x.so:system/lib64/libwifi_factory_test_hi110x.so \
-        $(LOCAL_PATH)/rootdir/lib64/libwifipro.so:system/lib64/libwifipro.so \
-        $(LOCAL_PATH)/rootdir/lib64/libwpa_client_hisi.so:system/lib64/libwpa_client_hisi.so \
-        $(LOCAL_PATH)/rootdir/vendor/lib/libbt-vendor-hi110x.so:system/vendor/lib/libbt-vendor-hi110x.so \
-        $(LOCAL_PATH)/rootdir/vendor/lib64/libbt-vendor-hi110x.so:system/vendor/lib64/libbt-vendor-hi110x.so
+$(call inherit-product, device/huawei/hi6210sft/products/Wifi.mk)
 
 PRODUCT_PACKAGES += \
 	bt_vendor.conf \
