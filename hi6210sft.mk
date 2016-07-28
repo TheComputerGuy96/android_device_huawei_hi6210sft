@@ -6,17 +6,28 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 PRODUCT_AAPT_CONFIG := xhdpi hdpi normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-
 # Audio
 PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/audio,system/etc/audio) \
         $(LOCAL_PATH)/rootdir/etc/audio_effects.conf:system/etc/audio_effects.conf \
-        $(LOCAL_PATH)/rootdir/etc/audio_policy.conf:system/etc/audio_policy.conf
+        $(LOCAL_PATH)/rootdir/etc/audio_policy.conf:system/etc/audio_policy.conf \
+        $(LOCAL_PATH)/rootdir/lib/hw/audio.primary.hi6210sft.so:system/lib/hw/audio.primary.hi6210sft.so \
+        $(LOCAL_PATH)/rootdir/lib/libaudioflinger.huawei.so:system/lib/libaudioflinger.huawei.so \
+        $(LOCAL_PATH)/rootdir/lib/libaudioroute.so:system/lib/libaudioroute.so \
+        $(LOCAL_PATH)/rootdir/lib64/hw/audio.primary.hi6210sft.so:system/lib64/hw/audio.primary.hi6210sft.so \
+        $(LOCAL_PATH)/rootdir/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 PRODUCT_PACKAGES += \
         audio.a2dp.default \
 	audio.primary.hi6210st \
         audio.r_submix.default \
         audio.usb.default \
+	libaudioutils \
+	libtinyalsa \
+    	sound_trigger.primary.hi6210sft \
+	tinycap	\
+	tinymix \
+	tinypcminfo \
         tinyplay
 
 # Bin
@@ -31,6 +42,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/bluetooth,system/etc/bluetooth)
 
+PRODUCT_PACKAGES += \
+	bluetooth.default \
+	
 # Boot
 PRE_BOOT_FILES := isp.bin ons.bin phone.prop
 
@@ -38,6 +52,15 @@ PRODUCT_COPY_FILES += \
        $(LOCAL_PATH)/rootdir/isp.bin:system/isp.bin \
        $(LOCAL_PATH)/rootdir/ons.bin:system/ons.bin \
        $(LOCAL_PATH)/rootdir/phone.prop:system/phone.prop
+
+# Camera
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/camera,system/etc/camera) \
+        $(LOCAL_PATH)/rootdir/etc/camera_orientation.cfg:system/etc/camera_orientation.cfg \
+        $(LOCAL_PATH)/rootdir/etc/camera_resolutions.cfg:system/etc/camera_resolutions.cfg \
+        $(LOCAL_PATH)/rootdir/etc/camera_videosnapshot.cfg:system/etc/camera_videosnapshot.cfg \
+        $(LOCAL_PATH)/rootdir/lib/hw/camera.hi6210sft.so:system/lib/hw/camera.hi6210sft.so \
+        $(LOCAL_PATH)/rootdir/lib64/hw/camera.hi6210sft.so:system/lib/lib64/hw/camera.hi6210sft.so
 
 # Chromium 32 Bit
 PRODUCT_COPY_FILES += \
@@ -53,6 +76,7 @@ PRODUCT_COPY_FILES += \
 
 # Codecs
 PRODUCT_COPY_FILES += \
+        frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
         $(LOCAL_PATH)/rootdir/etc/hisi_omx.cfg:system/etc/hisi_omx.cfg \
         $(LOCAL_PATH)/rootdir/etc/media_codecs.xml:system/etc/media_codecs.xml \
         $(LOCAL_PATH)/rootdir/etc/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
@@ -149,7 +173,19 @@ PRODUCT_COPY_FILES += \
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/usr/keylayout/hikey.kl:system/usr/keylayout/hikey.kl
+        $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/usr/keylayout,system/usr/keylayout) \
+
+# LibNVME
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/lib64/libnvme.so:system/lib64/libnvme.so \
+
+# Log
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/log,system/etc/log) \
+
+# modemConfig
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/modemConfig,system/etc/modemConfig) \
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
@@ -172,19 +208,30 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-    	$(LOCAL_PATH)/ramdisk/fstab.hi6210sft:root/fstab.hi6210sft \
-        $(LOCAL_PATH)/ramdisk/init.chip.hi6210sft.rc:root/init.chip.hi6210sft.rc \
-        $(LOCAL_PATH)/ramdisk/init.hi6210sft.rc:root/init.hi6210sft.rc \
-        $(LOCAL_PATH)/ramdisk/ueventd.hi6210sft.rc:root/ueventd.hi6210sft.rc
+       $(LOCAL_PATH)/ramdisk/fstab.hi6210sft:root/fstab.hi6210sft \
+       $(LOCAL_PATH)/ramdisk/init.chip.hi6210sft.rc:root/init.chip.hi6210sft.rc \
+       $(LOCAL_PATH)/ramdisk/init.hi6210sft.rc:root/init.hi6210sft.rc \
+       $(LOCAL_PATH)/ramdisk/ueventd.hi6210sft.rc:root/ueventd.hi6210sft.rc
 
 # RIL
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/rootdir/lib/libbalong_audio_ril.so:system/lib/libbalong_audio_ril.so \
         $(LOCAL_PATH)/rootdir/lib/libbalong-ril.so:system/lib/libbalong-ril.so \
         $(LOCAL_PATH)/rootdir/lib/libbalong-ril-1.so:system/lib/libbalong-ril-1.so \
+        $(LOCAL_PATH)/rootdir/lib/libreference-ril.so:system/lib/libreference-ril.so \
+        $(LOCAL_PATH)/rootdir/lib/librilutils.so:system/lib/librilutils.so \
         $(LOCAL_PATH)/rootdir/lib64/libbalong_audio_ril.so:system/lib64/libbalong_audio_ril.so \
         $(LOCAL_PATH)/rootdir/lib64/libbalong-ril.so:system/lib64/libbalong-ril.so \
         $(LOCAL_PATH)/rootdir/lib64/libbalong-ril-1.so:system/lib64/libbalong-ril-1.so \
+        $(LOCAL_PATH)/rootdir/lib64/libreference-ril.so:system/lib64/libreference-ril.so \
+        $(LOCAL_PATH)/rootdir/lib64/librilutils.so:system/lib64/librilutils.so
+
+PRODUCT_PACKAGES += \
+	hwcustTelephony-common \
+	hwframework \
+	hwServices\
+	hwTelephony-common \
+	hwWifi-services
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libbalong-ril.so \
@@ -196,10 +243,32 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.hw_device_mode=clg_mode \
 	ro.multi.rild=false
 
+# Supplicant
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/lib/libagnssal.so:system/lib/libagnssal.so \
+        $(LOCAL_PATH)/rootdir/lib/libgnssadapter.so:system/lib/libgnssadapter.so \
+        $(LOCAL_PATH)/rootdir/lib64/libagnssal.so:system/lib64/libagnssal.so \
+        $(LOCAL_PATH)/rootdir/lib64/libgnssadapter.so:system/lib64/libgnssadapter.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl10client.so:system/lib/libsupl10client.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20client.so:system/lib/libsupl20client.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20comon.so:system/lib/libsupl20comon.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20if.so:system/lib/libsupl20if.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1comn.so:system/lib/libsupl20oasn1comn.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1lpp.so:system/lib/libsupl20oasn1lpp.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1rrc.so:system/lib/libsupl20oasn1rrc.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1rrlp.so:system/lib/libsupl20oasn1rrlp.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1supl1.so:system/lib/libsupl20oasn1supl1.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1supl2.so:system/lib/libsupl20oasn1supl2.so \
+        $(LOCAL_PATH)/rootdir/lib/libsupl20oasn1tia.so:system/lib/libsupl20oasn1tia.so \
+
 # Thermald
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/rootdir/etc/thermald.xml:system/etc/thermald.xml \
         $(LOCAL_PATH)/rootdir/etc/thermald_performance.xml:system/etc/thermald_performance.xml
+
+# TP Huawei
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir/etc/tp_test_parameters,system/etc/tp_test_parameters) \
 
 # USB
 PRODUCT_PACKAGES += \
