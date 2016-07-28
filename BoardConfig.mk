@@ -17,7 +17,8 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a15
 
 # Audio
-BOARD_USES_GENERIC_AUDIO := true
+BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_GENERIC_AUDIO := false
 
 # Blobs
 -include vendor/hisi/hi6210sft/BoardConfigVendor.mk
@@ -41,7 +42,9 @@ TARGET_BOOTLOADER_BOARD_NAME := hi6210sft
 TARGET_NO_BOOTLOADER := true
 
 # Camera
-USE_CAMERA_STUB := true
+BOARD_CAMERA_HAVE_ISO := true
+COMMON_GLOBAL_CFLAGS += -DHAVE_ISO
+USE_CAMERA_STUB := false
 
 # Chromium
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
@@ -105,15 +108,15 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USES_HISI_DTIMAGE := true
 
 # Wifi
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE                := bcmdhd
 BOARD_WLAN_DEVICE_REV            := bcm4343s
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-WIFI_BAND                        := 802_11_ABG
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm4343s_hw.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm4343s_apsta_hw.bin"
 WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcm4343s_p2p_hw.bin"
-WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm4343s_test_hw_apsta.bin"
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
+WIFI_BAND                        := 802_11_ABG
